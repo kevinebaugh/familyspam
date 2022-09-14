@@ -5,3 +5,26 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+
+group = Group.create(
+  name: "Kevins",
+  email_alias: "alice"
+)
+
+group_admin = GroupAdmin.create(
+  email_address: "admin@ebaugh.org",
+  group_id: group.id
+)
+
+recipients = Recipient.create(
+  [
+    {
+      email_address: "kevinebaugh+1@gmail.com",
+      group_id: group.id
+    },
+    {
+      email_address: "kevinebaugh+2@gmail.com",
+      group_id: group.id
+    }
+  ]
+)
