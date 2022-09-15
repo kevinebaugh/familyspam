@@ -17,15 +17,24 @@ class MessagesController < ApplicationController
   def create
     render json: "Nobody found", status: :not_found and return unless group_ids_from_aliases&.any?
 
-    @message = Message.new(
-      group_id: group_ids_from_aliases,
-      raw_content: nil
-    )
+    errors = group_ids_from_aliases.each do |group_id|
+      @message = Message.new(
+        group_id: group_id,
+        raw_content: nil,
+        direction: :incoming
+      )
+      if @message.save
+        puts "📨 Saved an message for Group ID #{group_id}"
+        return nil
+      else
+        @message.errors
+      end
+    end
 
-    if @message.save
-      render json: @message, status: :created, location: @message
+    if errors
+      render json: { errors: errors }, status: :unprocessable_entity
     else
-      render json: @message.errors, status: :unprocessable_entity
+      render json: { errors: [] }, status: :created
     end
   end
 
