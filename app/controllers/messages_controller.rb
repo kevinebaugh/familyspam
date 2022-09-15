@@ -25,7 +25,7 @@ class MessagesController < ApplicationController
         direction: :incoming
       )
       if @message.save
-        puts "📨 Saved an message for Group ID #{group_id}"
+        puts "📨 Saved a message for Group ID #{group_id}"
         return nil
       else
         @message.errors
