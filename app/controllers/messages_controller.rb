@@ -20,6 +20,7 @@ class MessagesController < ApplicationController
     errors = group_ids_from_aliases.each do |group_id|
       @message = Message.new(
         group_id: group_id,
+        from: params["from"]
         subject: params["subject"],
         raw_content: params["body-plain"], # just plain text for now
         direction: :incoming
