@@ -15,8 +15,10 @@ class Message < ApplicationRecord
   end
 
   def create_outgoing_messages_from_incoming_message
-    puts "In create_outgoing_from_incoming"
-    puts "\n\n\n\n\n\n\n\n#{id}\n\n\n\n\n\n\n\n"
-    puts "\n\n\n\n\n\n\n\ngroup: #{group.id}\n\n\n\n\n\n\n\n"
+    group.recipients.each do |recipient|
+      puts "📤 Sending email to #{recipient.email_address}"
+      puts "Subject: #{subject}"
+      puts "Body-plain: #{raw_content}"
+    end
   end
 end
