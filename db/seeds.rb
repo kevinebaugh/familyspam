@@ -6,25 +6,57 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-group = Group.create(
+kevin = Recipient.create(
+  email_address: "kevinebaugh@gmail.com"
+)
+
+kevins = Group.create(
   name: "Kevins",
-  email_alias: "alice"
+  email_alias: "kevins"
+)
+
+group_admin = GroupAdmin.create(
+  email_address: "admin@kevin.org",
+  group_id: kevins.id
+)
+
+kevins_recipients = [
+  kevin,
+  Recipient.create(
+    email_address: "kevin@ifttt.com"
+  )
+]
+
+kevins_recipients.each do |recipient|
+  GroupRecipient.create(
+    group_id: kevins.id,
+    recipient_id: recipient.id
+  )
+end
+
+ebaughs = Group.create(
+  name: "Ebaughs",
+  email_alias: "ebaughs"
 )
 
 group_admin = GroupAdmin.create(
   email_address: "admin@ebaugh.org",
-  group_id: group.id
+  group_id: ebaughs.id
 )
 
-recipients = Recipient.create(
-  [
-    {
-      email_address: "kevinebaugh+1@gmail.com",
-      group_id: group.id
-    },
-    {
-      email_address: "kevinebaugh+2@gmail.com",
-      group_id: group.id
-    }
-  ]
-)
+ebaughs_recipients =[
+  kevin,
+  Recipient.create(
+    email_address: "lizmeg726@gmail.com"
+  )
+]
+
+ebaughs_recipients.each do |recipient|
+  GroupRecipient.create(
+    group_id: ebaughs.id,
+    recipient_id: recipient.id
+  )
+end
+
+
+puts "🌱 Created #{Recipient.count} Recipients, #{Group.count} Groups, and #{GroupRecipient.count} GroupRecipients."

@@ -1,3 +1,4 @@
 class Recipient < ApplicationRecord
-  belongs_to :group
+  has_many :group_recipients
+  has_many :groups, through: :group_recipients
 end

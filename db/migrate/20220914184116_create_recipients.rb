@@ -4,8 +4,5 @@ class CreateRecipients < ActiveRecord::Migration[6.1]
       t.text :email_address
       t.timestamps
     end
-
-    add_reference :recipients, :group
-
   end
 end
