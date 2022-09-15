@@ -58,5 +58,4 @@ ebaughs_recipients.each do |recipient|
   )
 end
 
-
 puts "🌱 Created #{Recipient.count} Recipients, #{Group.count} Groups, and #{GroupRecipient.count} GroupRecipients."
