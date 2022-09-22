@@ -17,7 +17,8 @@ kevins = Group.create(
 
 group_admin = GroupAdmin.create(
   email_address: "admin@kevin.org",
-  group_id: kevins.id
+  group_id: kevins.id,
+  password_digest: "test"
 )
 
 kevins_recipients = [
@@ -41,7 +42,8 @@ ebaughs = Group.create(
 
 group_admin = GroupAdmin.create(
   email_address: "admin@ebaugh.org",
-  group_id: ebaughs.id
+  group_id: ebaughs.id,
+  password_digest: "test"
 )
 
 ebaughs_recipients =[
@@ -58,4 +60,4 @@ ebaughs_recipients.each do |recipient|
   )
 end
 
-puts "🌱 Created #{Recipient.count} Recipients, #{Group.count} Groups, and #{GroupRecipient.count} GroupRecipients."
+puts "🌱 Created #{Recipient.count} Recipients, #{Group.count} Groups, #{GroupAdmin.count} GroupAdmins, and #{GroupRecipient.count} GroupRecipients."
