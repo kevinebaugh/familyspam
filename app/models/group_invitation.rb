@@ -32,7 +32,7 @@ class GroupInvitation < ApplicationRecord
       to: email_address,
       "h:Reply-To": group.group_admin.email_address,
       subject: "You're invited to the #{group.name} group on OutstandingBeef.com",
-      text: "Code: #{code} | Expiration date: #{expiration_date}"
+      text: "Quick, you only have 24 hours to accept this invitation: http://localhost:3000/accept/#{code}"
     }
 
     mg_client.send_message 'outstandingbeef.com', message_params
