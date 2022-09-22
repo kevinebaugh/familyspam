@@ -29,7 +29,7 @@ gem 'dotenv-rails', groups: [:development, :test]
 
 gem 'mailgun-ruby', '~>1.2.5'
 
-gem 'net-smtp'
+gem 'net-smtp', require: false
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
