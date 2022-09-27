@@ -4,6 +4,7 @@ class GroupInvitation < ApplicationRecord
   belongs_to :group
 
   validates_presence_of :email_address
+  validate :unique_invitation, on: :create
 
   before_create :set_expiration_date
   before_create :create_code
@@ -14,6 +15,18 @@ class GroupInvitation < ApplicationRecord
 
   def active?
     (Time.now.to_i - created_at.to_i) < INVITATION_EXPIRATION_IN_SECONDS
+  end
+
+  def unique_invitation
+    receiving_group = Group.find(group_id)
+
+    if receiving_group.recipients.find_by(email_address: email_address).present?
+      errors.add(:base, "#{email_address} is already a member of this group")
+    end
+
+    if GroupInvitation.where(group_id: group_id, email_address: email_address).any?(&:active?)
+      errors.add(:base, "#{email_address} already has an active invitation to this group")
+    end
   end
 
   def set_expiration_date
@@ -31,11 +44,11 @@ class GroupInvitation < ApplicationRecord
       from: group.group_admin.email_address,
       to: email_address,
       "h:Reply-To": group.group_admin.email_address,
-      subject: "You're invited to the #{group.name} group on OutstandingBeef.com",
+      subject: "You're invited to the #{group.name} group on FamilySpam.com",
       text: "Quick, you only have 24 hours to accept this invitation: http://localhost:3000/accept/#{code}"
     }
 
-    mg_client.send_message 'outstandingbeef.com', message_params
+    mg_client.send_message 'familyspam.com', message_params
   end
 
   def self.validate_code(code)
