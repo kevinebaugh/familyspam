@@ -28,12 +28,12 @@ class Message < ApplicationRecord
       message_params = {
         from: from,
         to: recipient.email_address,
-        "h:Reply-To": "ebaughs@outstandingbeef.com, #{from}",
+        "h:Reply-To": "ebaughs@familyspam.com, #{from}",
         subject: subject,
         text: raw_content
       }
 
-      mg_client.send_message 'outstandingbeef.com', message_params
+      mg_client.send_message 'familyspam.com', message_params
     end
   end
 end
