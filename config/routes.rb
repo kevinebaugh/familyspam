@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   resources :recipients
   resources :messages
 
-  get 'accept/:code', to: 'group_invitations#validate'
+  get 'accept/:code', to: 'group_invitations#accept'
 
   # Routing logic: fallback requests for React Router.
   # Leave this here to help deploy your app later!

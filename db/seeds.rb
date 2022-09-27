@@ -16,7 +16,7 @@ kevins = Group.create(
 )
 
 group_admin = GroupAdmin.create(
-  email_address: "admin@kevin.org",
+  email_address: "kevinebaugh+kevins-admin@gmail.com",
   group_id: kevins.id,
   password_digest: "test"
 )
@@ -41,7 +41,7 @@ ebaughs = Group.create(
 )
 
 group_admin = GroupAdmin.create(
-  email_address: "admin@ebaugh.org",
+  email_address: "kevinebaugh+ebaughs-admin@gmail.com",
   group_id: ebaughs.id,
   password_digest: "test"
 )

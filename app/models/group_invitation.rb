@@ -67,6 +67,22 @@ class GroupInvitation < ApplicationRecord
     mg_client.send_message 'familyspam.com', message_params
   end
 
+  def self.notify_group_admin_of_accepted_invitation(group_id:, email_address:)
+    group = Group.find(group_id)
+
+    mg_client = Mailgun::Client.new(ENV["MAILGUN_KEY"])
+
+    message_params = {
+      from: email_address,
+      to: group.group_admin.email_address,
+      "h:Reply-To": email_address,
+      subject: "➕ #{email_address} is now a member of the #{group.name} family on FamilySpam.com",
+      text: "Emails sent to #{group.email_alias}@familyspam.com are forwarded to all members of the #{group.name} family (#{group.recipients.pluck(:email_address).join(", ")})."
+    }
+
+    mg_client.send_message 'familyspam.com', message_params
+  end
+
   def self.validate_code(code)
     invitation = self.find_by(code: code)
     if invitation&.active? && invitation.group.recipients.find_by(email_address: invitation.email_address).blank?

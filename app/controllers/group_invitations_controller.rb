@@ -38,7 +38,7 @@ class GroupInvitationsController < ApplicationController
     @group_invitation.destroy
   end
 
-  def validate
+  def accept
     errors = []
 
     valid_code = GroupInvitation.validate_code(params[:code])
@@ -57,6 +57,11 @@ class GroupInvitationsController < ApplicationController
 
       if group_recipient.save
         GroupInvitation.send_welcome(
+          group_id: group_invitation.group_id,
+          email_address: email_address
+        )
+
+        GroupInvitation.notify_group_admin_of_accepted_invitation(
           group_id: group_invitation.group_id,
           email_address: email_address
         )
