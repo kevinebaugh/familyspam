@@ -49,7 +49,7 @@ group_admin = GroupAdmin.create(
 ebaughs_recipients =[
   kevin,
   Recipient.create(
-    email_address: "lizmeg726@gmail.com"
+    email_address: "kevinebaugh+anotherebaugh@gmail.com"
   )
 ]
 
