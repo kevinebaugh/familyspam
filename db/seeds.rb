@@ -62,7 +62,7 @@ end
 
 GroupInvitation.create(
   group_id: ebaughs.id,
-  email_address: "kevinebaugh+invitation-#{SecureRandom.hex}@gmail.com}"
+  email_address: "kevinebaugh+invitation-#{SecureRandom.hex}@gmail.com"
 )
 
 puts "🌱 Created #{Recipient.count} Recipients, #{Group.count} Groups, #{GroupAdmin.count} GroupAdmins, #{GroupRecipient.count} GroupRecipients, and #{GroupInvitation.count} GroupInvitation."
