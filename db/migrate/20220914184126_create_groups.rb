@@ -6,7 +6,5 @@ class CreateGroups < ActiveRecord::Migration[6.1]
       t.timestamps
     end
 
-    add_reference :groups, :group_admin
-
   end
 end

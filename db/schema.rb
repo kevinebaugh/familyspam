@@ -48,8 +48,6 @@ ActiveRecord::Schema.define(version: 2022_09_22_003313) do
     t.string "email_alias"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "group_admin_id"
-    t.index ["group_admin_id"], name: "index_groups_on_group_admin_id"
   end
 
   create_table "messages", force: :cascade do |t|
