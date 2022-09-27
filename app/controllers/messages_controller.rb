@@ -65,14 +65,16 @@ class MessagesController < ApplicationController
       params.fetch(:message, {})
     end
 
+    def incoming_aliases
+      params["recipient"].split(",").map{ |address| address.split("@")[0] }
+    end
+
     def group_ids_from_aliases
       # params["recipient"] sometimes has multiple email addresses, so split it just in case.
       # So far, haven't seen a name attached to params["recipient"] so not worrying about that for now.
       # Examples:
       # • anything@sandboxc07be1039bd545938ea0cc91b46bfe65.mailgun.org
       # • anything@sandboxc07be1039bd545938ea0cc91b46bfe65.mailgun.org,anything-bcc@sandboxc07be1039bd545938ea0cc91b46bfe65.mailgun.org,anything-to@sandboxc07be1039bd545938ea0cc91b46bfe65.mailgun.org
-
-      incoming_aliases = params["recipient"].split(",").map{ |address| address.split("@")[0] }
 
       group_ids_to_message = incoming_aliases.map do |incoming_alias|
         Group.find_by(email_alias: incoming_alias)&.id
