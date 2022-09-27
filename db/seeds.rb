@@ -11,7 +11,7 @@ kevin = Recipient.create(
 )
 
 kevins = Group.create(
-  name: "Kevins",
+  name: "Kevin",
   email_alias: "kevins"
 )
 
@@ -36,7 +36,7 @@ kevins_recipients.each do |recipient|
 end
 
 ebaughs = Group.create(
-  name: "Ebaughs",
+  name: "Ebaugh",
   email_alias: "ebaughs"
 )
 
@@ -60,4 +60,9 @@ ebaughs_recipients.each do |recipient|
   )
 end
 
-puts "🌱 Created #{Recipient.count} Recipients, #{Group.count} Groups, #{GroupAdmin.count} GroupAdmins, and #{GroupRecipient.count} GroupRecipients."
+GroupInvitation.create(
+  group_id: ebaughs.id,
+  email_address: "kevinebaugh+invitation-#{SecureRandom.hex}@gmail.com}"
+)
+
+puts "🌱 Created #{Recipient.count} Recipients, #{Group.count} Groups, #{GroupAdmin.count} GroupAdmins, #{GroupRecipient.count} GroupRecipients, and #{GroupInvitation.count} GroupInvitation."

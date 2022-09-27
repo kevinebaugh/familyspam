@@ -44,8 +44,24 @@ class GroupInvitation < ApplicationRecord
       from: group.group_admin.email_address,
       to: email_address,
       "h:Reply-To": group.group_admin.email_address,
-      subject: "You're invited to the #{group.name} group on FamilySpam.com",
+      subject: "👋 You're invited to the #{group.name} family on FamilySpam.com",
       text: "Quick, you only have 24 hours to accept this invitation: http://localhost:3000/accept/#{code}"
+    }
+
+    mg_client.send_message 'familyspam.com', message_params
+  end
+
+  def self.send_welcome(group_id:, email_address:)
+    group = Group.find(group_id)
+
+    mg_client = Mailgun::Client.new(ENV["MAILGUN_KEY"])
+
+    message_params = {
+      from: group.group_admin.email_address,
+      to: email_address,
+      "h:Reply-To": group.group_admin.email_address,
+      subject: "✅ You're now a member of the #{group.name} family on FamilySpam.com",
+      text: "Welcome!\n\nEmails sent to #{group.email_alias}@familyspam.com are forwarded to all members of the #{group.name} family (#{group.recipients.pluck(:email_address).join(", ")})\n\nReach out to #{group.group_admin.email_address} (or respond to this email) with any questions or issues."
     }
 
     mg_client.send_message 'familyspam.com', message_params
@@ -53,7 +69,7 @@ class GroupInvitation < ApplicationRecord
 
   def self.validate_code(code)
     invitation = self.find_by(code: code)
-    if invitation&.active?
+    if invitation&.active? && invitation.group.recipients.find_by(email_address: invitation.email_address).blank?
       true
     else
       false

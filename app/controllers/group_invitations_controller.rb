@@ -56,10 +56,10 @@ class GroupInvitationsController < ApplicationController
       )
 
       if group_recipient.save
-        puts "group_recipient.id: #{group_recipient.id}"
-        puts "group_recipient.recipient.id: #{group_recipient.recipient.id}"
-        puts "recipient.id: #{recipient.id}"
-
+        GroupInvitation.send_welcome(
+          group_id: group_invitation.group_id,
+          email_address: email_address
+        )
       else
         errors.push("Error creating group recipient")
       end
