@@ -45,7 +45,7 @@ class GroupInvitation < ApplicationRecord
       to: email_address,
       "h:Reply-To": group.group_admin.email_address,
       subject: "👋 You're invited to the #{group.name} family on FamilySpam.com",
-      text: "Quick, you only have 24 hours to accept this invitation: http://localhost:3000/accept/#{code}"
+      text: "Quick, you only have 24 hours to accept this invitation: http://#{ENV["DOMAIN"]}/accept/#{code}"
     }
 
     mg_client.send_message 'familyspam.com', message_params
