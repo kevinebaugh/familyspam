@@ -10,9 +10,6 @@ function SignInUp( {user, setUser} ) {
 
   function handleSignup(e) {
     e.preventDefault()
-    console.log("email_address", email_address)
-    console.log("password", password)
-    console.log("password_confirmation", password_confirmation)
 
     fetch("/group_admins", {
       method: "POST",
@@ -26,7 +23,6 @@ function SignInUp( {user, setUser} ) {
       }),
     }).then(response => response.json())
       .then(data => {
-        console.log(data)
         setUser(data)
       })
   }
