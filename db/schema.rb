@@ -51,7 +51,8 @@ ActiveRecord::Schema.define(version: 2022_09_22_003313) do
   end
 
   create_table "messages", force: :cascade do |t|
-    t.text "raw_content"
+    t.text "body_plain"
+    t.text "body_html"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "group_id"

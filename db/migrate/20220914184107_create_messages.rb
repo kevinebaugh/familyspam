@@ -1,7 +1,8 @@
 class CreateMessages < ActiveRecord::Migration[6.1]
   def change
     create_table :messages do |t|
-      t.text :raw_content
+      t.text :body_plain
+      t.text :body_html
       t.timestamps
     end
 

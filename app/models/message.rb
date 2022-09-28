@@ -20,7 +20,6 @@ class Message < ApplicationRecord
       puts "📤 Sending email to #{recipient.email_address}"
       puts "From: #{from}"
       puts "Subject: #{subject}"
-      puts "Body-plain: #{raw_content}"
 
       mg_client = Mailgun::Client.new(ENV["MAILGUN_KEY"])
 
@@ -30,7 +29,8 @@ class Message < ApplicationRecord
         to: recipient.email_address,
         "h:Reply-To": "#{group.email_alias}@familyspam.com, #{from}",
         subject: subject,
-        text: raw_content
+        text: body_plain,
+        html: body_html
       }
 
       mg_client.send_message 'familyspam.com', message_params

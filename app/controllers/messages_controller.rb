@@ -22,8 +22,8 @@ class MessagesController < ApplicationController
         group_id: group_id,
         from: params["from"],
         subject: params["subject"],
-        # raw_content: params["body-plain"], # just plain text for now
-        raw_content: params["body-html"], # just plain text for now
+        body_plain: params["body-plain"],
+        body_html: params["body-html"],
         direction: :incoming
       )
       if @message.save
