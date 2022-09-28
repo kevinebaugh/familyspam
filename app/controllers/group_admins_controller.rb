@@ -38,8 +38,6 @@ class GroupAdminsController < ApplicationController
       group_id: group.id
     )
 
-    group.recipients.push(group_admin)
-
     session[:group_admin_id] = group_admin.id
 
     render json: group_admin, status: :created
