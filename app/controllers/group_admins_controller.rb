@@ -1,5 +1,12 @@
 class GroupAdminsController < ApplicationController
-  before_action :set_group_admin, only: [:show, :update, :destroy]
+  before_action :set_group_admin, only: [:me, :show, :update, :destroy]
+
+  def me
+    puts "params: #{params}"
+    puts "session[:group_admin_id]: #{session[:group_admin_id]}"
+
+    render json: @group_admin
+  end
 
   # GET /group_admins
   def index
@@ -33,7 +40,7 @@ class GroupAdminsController < ApplicationController
 
     session[:group_admin_id] = group_admin.id
 
-    render json: group_admin, include: :group, status: :created
+    render json: group_admin, status: :created
   rescue => e
     render json: {error: e}, status: :unprocessable_entity
   end
@@ -55,7 +62,7 @@ class GroupAdminsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_group_admin
-      @group_admin = GroupAdmin.find(params[:id])
+      @group_admin = GroupAdmin.find(session[:group_admin_id])
     end
 
     # Only allow a list of trusted parameters through.

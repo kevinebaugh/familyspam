@@ -26,6 +26,7 @@ class GroupsController < ApplicationController
 
   # PATCH/PUT /groups/1
   def update
+
     if @group.update(group_params)
       render json: @group
     else
@@ -41,11 +42,11 @@ class GroupsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_group
-      @group = Group.find(params[:id])
+      @group = GroupAdmin.find(session[:group_admin_id]).group
     end
 
     # Only allow a list of trusted parameters through.
     def group_params
-      params.fetch(:group, {})
+      params.permit(:id, :name, :email_alias)
     end
 end

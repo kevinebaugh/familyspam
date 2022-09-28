@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Stack from 'react-bootstrap/Stack';
 
-function SignInUp() {
+function SignInUp( {user, setUser} ) {
   const [email_address, setEmailAddress] = useState("");
   const [password, setPassword] = useState("");
   const [password_confirmation, setPasswordConfirmation] = useState("");
@@ -27,6 +27,7 @@ function SignInUp() {
     }).then(response => response.json())
       .then(data => {
         console.log(data)
+        setUser(data)
       })
   }
 

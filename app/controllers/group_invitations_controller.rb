@@ -1,4 +1,5 @@
 class GroupInvitationsController < ApplicationController
+  before_action :set_group_admin, only: [:create]
   before_action :set_group_invitation, only: [:show, :update, :destroy]
 
   # GET /group_invitations
@@ -15,7 +16,12 @@ class GroupInvitationsController < ApplicationController
 
   # POST /group_invitations
   def create
-    @group_invitation = GroupInvitation.new(group_invitation_params)
+    render json: "🔒", status: :unauthorized and return unless @group_admin
+
+    @group_invitation = GroupInvitation.new(
+      group_id: @group_admin.group_id,
+      email_address: params[:email_address]
+    )
 
     if @group_invitation.save
       render json: @group_invitation, status: :created, location: @group_invitation
@@ -78,13 +84,17 @@ class GroupInvitationsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_group_invitation
-      @group_invitation = GroupInvitation.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def group_invitation_params
-      params.fetch(:group_invitation, {})
-    end
+  def set_group_admin
+    @group_admin = GroupAdmin.find(session[:group_admin_id])
+  end
+
+  def set_group_invitation
+    @group_invitation = GroupInvitation.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def group_invitation_params
+    params.fetch(:group_invitation, {})
+  end
 end
