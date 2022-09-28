@@ -112,7 +112,7 @@ function GroupManagement( {user} ) {
       <Stack gap={2} className="col-md-5 mx-auto">
         <h2>Group management</h2>
         <h3>Group name: {groupName}</h3>
-        <h4 style={{ cursor: "pointer" }} onClick={copyAliasToClipboard}>Family email address: <code>ebaughs@familyspam.com</code></h4>
+        <h4 style={{ cursor: "pointer" }} onClick={copyAliasToClipboard}>Family email address: <code>{emailAlias}@familyspam.com</code></h4>
         {user.recipients.length > 0 &&
           <>
             <hr/>
