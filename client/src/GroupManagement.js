@@ -82,6 +82,21 @@ function GroupManagement( {user} ) {
       })
   }
 
+  function copyAliasToClipboard(e) {
+    e.preventDefault()
+    const text = `${emailAlias}@familyspam.com`
+
+    if (!navigator.clipboard) {
+      setToastBody(`There was an error copying your email alias to your clipboard.`)
+      return
+    } else {
+      setToastBody(`Your email alias (${emailAlias}@familyspam.com)
+        has been copied to your clipboard.`)
+    }
+    navigator.clipboard.writeText(text)
+    setShowToast(true)
+  }
+
   return (
     <>
       <ToastContainer position="top-end" className="p-3">
@@ -97,14 +112,19 @@ function GroupManagement( {user} ) {
       <Stack gap={2} className="col-md-5 mx-auto">
         <h2>Group management</h2>
         <h3>Group name: {groupName}</h3>
+        <h4 style={{ cursor: "pointer" }} onClick={copyAliasToClipboard}>Family email address: <code>ebaughs@familyspam.com</code></h4>
         {user.recipients.length > 0 &&
-          <ListGroup variant="flush">
-            <h4>Active recipients:</h4>
-            {user.recipients.map( (recipient) => (
-              <ListGroup.Item>• {recipient.email_address}</ListGroup.Item>
-            ))}
-          </ListGroup>
+          <>
+            <hr/>
+            <ListGroup >
+              <h4>Active recipients:</h4>
+              {user.recipients.map( (recipient) => (
+                <ListGroup.Item>• {recipient.email_address}</ListGroup.Item>
+                ))}
+            </ListGroup>
+          </>
         }
+        <hr/>
         <Form onSubmit={handleInvite}>
           <Form.Group className="mb-3" controlId="formBasicEmail">
             <Form.Label><h4>Invite someone to your group:</h4></Form.Label>

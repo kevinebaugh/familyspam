@@ -1,7 +1,7 @@
 class Message < ApplicationRecord
   require 'mailgun-ruby'
 
-  belongs_to :group
+  belongs_to :group, counter_cache: true
 
   validates :direction, inclusion: ["incoming", "outgoing"]
 
