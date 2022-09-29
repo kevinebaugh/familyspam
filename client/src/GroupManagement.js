@@ -142,11 +142,12 @@ function GroupManagement( {user} ) {
 
           <Button
             disabled={invitedEmailAddress === ""}
-            variant="primary"
+            variant="outline-primary"
             type="submit"
           >
             Invite
           </Button>
+          <hr/>
         </Form>
 
         <Form onSubmit={handleGroupNameUpdate}>
@@ -166,11 +167,12 @@ function GroupManagement( {user} ) {
 
           <Button
             disabled={newGroupName === ""}
-            variant="primary"
+            variant="outline-primary"
             type="submit"
           >
             Update
           </Button>
+          <hr/>
         </Form>
 
         <Form onSubmit={handleGroupAliasUpdate}>
@@ -197,12 +199,18 @@ function GroupManagement( {user} ) {
 
           <Button
             disabled={newEmailAlias === ""}
-            variant="primary"
+            variant="outline-primary"
             type="submit"
           >
             Update
           </Button>
+          <hr/>
         </Form>
+        <form action="/create-checkout-session" method="POST">
+          <h4>Subscribe ($1 / 100 emails)</h4>
+          <input type="hidden" name="priceId" value="price_1LnOP8JT2S6kGp57M50PIttD" />
+          <Button variant="outline-primary" type="submit">Checkout</Button>
+        </form>
       </Stack>
     </>
   );
