@@ -5,7 +5,7 @@
     "node": "16.x"
   },
   "dependencies": {
-    "react-router-dom": "^5.3.3"
+    "react-router-dom": "^5.2.0"
   },
   "scripts": {
     "build": "npm install --prefix client && npm run build --prefix client",
