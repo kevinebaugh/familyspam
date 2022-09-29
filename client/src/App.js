@@ -5,6 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import SignInUp from "./SignInUp";
 import NavBar from "./NavBar";
+import Faqs from "./Faqs";
 import GroupManagement from "./GroupManagement";
 
 function App() {
@@ -40,6 +41,16 @@ function App() {
             <SignInUp user={user} setUser={setUser} />
           </Route>
         </Switch>
+        <Route exact path="/">
+          {user ? (
+            <GroupManagement user={user} />
+          ) : (
+            <SignInUp user={user} setUser={setUser} />
+          )}
+        </Route>
+        <Route exact path="/faqs">
+          <Faqs />
+        </Route>
       </BrowserRouter>
       </div>
   );

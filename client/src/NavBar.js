@@ -14,11 +14,11 @@ function NavBar( {user} ) {
       }
     }).then(response => response.json())
       .then(data => {
-        console.log(data)
+        document.location.assign("/sign-in")
       })
       .catch((error) => {
         console.error(error)
-        window.location.reload(false);
+        document.location.assign("/sign-in")
       })}
 
   return (
