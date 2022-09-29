@@ -1,5 +1,6 @@
 class FaqsController < ApplicationController
   before_action :set_faq, only: [:show, :update, :destroy]
+  before_action :authenticate, except: [:index, :show]
 
   # GET /faqs
   def index
@@ -39,13 +40,23 @@ class FaqsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_faq
-      @faq = Faq.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def faq_params
-      params.require(:faq).permit(:question, :answer, :weight)
+  def compare_headers
+    ActiveSupport::SecurityUtils.secure_compare(request.headers["Authorization"], "Bearer #{ENV["FAQ_KEY"]}")
+  end
+
+  def authenticate
+    unless compare_headers
+      render json: "🔒", status: :unauthorized and return
     end
+  end
+
+  def set_faq
+    @faq = Faq.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def faq_params
+    params.require(:faq).permit(:question, :answer, :weight)
+  end
 end
