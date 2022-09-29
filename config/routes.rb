@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :faqs
   resources :group_admins
   resources :groups
   resources :group_invitations

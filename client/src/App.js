@@ -17,14 +17,12 @@ function App() {
         if (response.ok) {
           response.json()
           .then(data => {
-            console.log("data", data)
             setUser(data)
           })
         } else {
           console.log("Signed out")
         }
       })
-
   }, []);
 
   return (
