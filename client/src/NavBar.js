@@ -31,7 +31,7 @@ function NavBar( {user} ) {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
             <Nav.Link href="/">Home</Nav.Link>
-            <Nav.Link href="/faqs">FAQs</Nav.Link>
+            <Nav.Link href="/frequently-asked-questions">FAQs</Nav.Link>
             <NavDropdown title="More" id="basic-nav-dropdown">
               <NavDropdown.Item href="#action/3.1">FAQs</NavDropdown.Item>
               <NavDropdown.Item href="#action/3.2">

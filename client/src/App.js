@@ -53,7 +53,7 @@ function App() {
             )}
           </Route>
 
-          <Route exact path="/faqs">
+          <Route exact path="/frequently-asked-questions">
             <Faqs />
           </Route>
         </Switch>
