@@ -33,11 +33,9 @@ function NavBar( {user} ) {
             <Nav.Link href="/">Home</Nav.Link>
             <Nav.Link href="/frequently-asked-questions">FAQs</Nav.Link>
             <NavDropdown title="More" id="basic-nav-dropdown">
-              <NavDropdown.Item href="#action/3.1">FAQs</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">
-                Terms and conditions
+              <NavDropdown.Item target="_blank" href="mailto:kevinebaugh+family-spam@gmail.com?subject=Question%20about%20Family%20Spam">
+                Email us
               </NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">Contact us</NavDropdown.Item>
               {user && (
                 <>
                   <NavDropdown.Divider />
