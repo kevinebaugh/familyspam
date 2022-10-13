@@ -45,7 +45,7 @@ class GroupInvitation < ApplicationRecord
       to: email_address,
       "h:Reply-To": group.group_admin.email_address,
       subject: "👋 You're invited to the #{group.name} family on FamilySpam.com",
-      text: "Quick, you only have 24 hours to accept this invitation: http://#{ENV["DOMAIN"]}/accept/#{code}"
+      text: "Quick, you only have 24 hours to accept this invitation: #{ENV["FRONT_END_DOMAIN_WITH_SCHEME"]}/accept/#{code}"
     }
 
     mg_client.send_message 'familyspam.com', message_params
@@ -61,7 +61,7 @@ class GroupInvitation < ApplicationRecord
       to: email_address,
       "h:Reply-To": group.group_admin.email_address,
       subject: "✅ You're now a member of the #{group.name} family on FamilySpam.com",
-      text: "Welcome!\n\nEmails sent to #{group.email_alias}@familyspam.com are forwarded to all members of the #{group.name} family (#{group.recipients.pluck(:email_address).join(", ")})\n\nReach out to #{group.group_admin.email_address} (or respond to this email) with any questions or issues."
+      text: "Welcome!\n\nEmails sent to #{group.email_alias}@familyspam.com are forwarded to you and all of the other members of the #{group.name} family.\n\nReach out to #{group.group_admin.email_address} (or respond to this email) with any questions or issues."
     }
 
     mg_client.send_message 'familyspam.com', message_params
