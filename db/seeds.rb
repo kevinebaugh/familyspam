@@ -65,4 +65,39 @@ GroupInvitation.create(
   email_address: "kevinebaugh+invitation-#{SecureRandom.hex}@gmail.com"
 )
 
-puts "🌱 Created #{Recipient.count} Recipients, #{Group.count} Groups, #{GroupAdmin.count} GroupAdmins, #{GroupRecipient.count} GroupRecipients, and #{GroupInvitation.count} GroupInvitation."
+# Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
+
+Faq.create([
+  {
+    question: "Who?",
+    answer: "You?",
+    weight: rand(1000)
+  },
+  {
+    question: "What?",
+    answer: "Did I stutter?",
+    weight: rand(1000)
+  },
+  {
+    question: "Where?",
+    answer: "There!",
+    weight: rand(1000)
+  },
+  {
+    question: "When?",
+    answer: "I forget.",
+    weight: rand(1000)
+  },
+  {
+    question: "Why?",
+    answer: "Why not!",
+    weight: rand(1000)
+  }
+])
+
+puts "🌱 Created #{Recipient.count} #{"Recipient".pluralize(Recipient.count)}"
+puts "🌱 Created #{Group.count} #{"Group".pluralize(Group.count)}"
+puts "🌱 Created #{GroupAdmin.count} #{"GroupAdmin".pluralize(GroupAdmin.count)}"
+puts "🌱 Created #{GroupRecipient.count} #{"GroupRecipient".pluralize(GroupRecipient.count)}"
+puts "🌱 Created #{GroupInvitation.count} #{"GroupInvitation".pluralize(GroupInvitation.count)}"
+puts "🌱 Created #{Faq.count} #{"Faq".pluralize(Faq.count)}"
