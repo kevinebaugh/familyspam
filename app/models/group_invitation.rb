@@ -44,7 +44,7 @@ class GroupInvitation < ApplicationRecord
       from: group.group_admin.email_address,
       to: email_address,
       "h:Reply-To": group.group_admin.email_address,
-      subject: "👋 You're invited to the #{group.name} family on FamilySpam.com",
+      subject: "👋 You're invited to the #{group.name.gsub("family", "")} family on FamilySpam.com",
       text: "Quick, you only have 24 hours to accept this invitation: #{ENV["FRONT_END_DOMAIN_WITH_SCHEME"]}/accept/#{code}"
     }
 
