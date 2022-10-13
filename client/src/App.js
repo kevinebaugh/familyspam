@@ -30,27 +30,34 @@ function App() {
       <BrowserRouter>
         <NavBar user={user} />
         <Switch>
+          <Route path="/accept">
+            {/* <InvitationAcceptance code={window.location.toString().split("/")[4]} /> */}
+          </Route>
+
           {user &&
             <Route exact path="/group-management">
               <GroupManagement user={user} />
             </Route>
           }
+
           <Route exact path="/sign-in">
             <SignInUp user={user} setUser={setUser} />
           </Route>
+
+          <Route exact path="/">
+            {user ? (
+              <GroupManagement user={user} />
+            ) : (
+              <SignInUp user={user} setUser={setUser} />
+            )}
+          </Route>
+
+          <Route exact path="/faqs">
+            <Faqs />
+          </Route>
         </Switch>
-        <Route exact path="/">
-          {user ? (
-            <GroupManagement user={user} />
-          ) : (
-            <SignInUp user={user} setUser={setUser} />
-          )}
-        </Route>
-        <Route exact path="/faqs">
-          <Faqs />
-        </Route>
       </BrowserRouter>
-      </div>
+    </div>
   );
 }
 
