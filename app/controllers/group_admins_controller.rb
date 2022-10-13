@@ -27,7 +27,7 @@ class GroupAdminsController < ApplicationController
     end
 
     group = Group.create!(
-      name: "#{params[:email_address]}'s group",
+      name: "#{params[:email_address]}'s family",
       email_alias: SecureRandom.hex
     )
 

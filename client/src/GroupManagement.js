@@ -22,7 +22,7 @@ function GroupManagement( {user} ) {
   function handleInvite(e) {
     e.preventDefault()
 
-    setToastBody(`${invitedEmailAddress} has been invited to your group.
+    setToastBody(`${invitedEmailAddress} has been invited to your family.
       They will have 24 hours to accept the invitation.`)
 
     fetch("/group_invitations", {
@@ -91,8 +91,7 @@ function GroupManagement( {user} ) {
       setToastBody(`There was an error copying your email alias to your clipboard.`)
       return
     } else {
-      setToastBody(`Your email alias (${emailAlias}@familyspam.com)
-        has been copied to your clipboard.`)
+      setToastBody(`Your family's email alias has been copied to your clipboard.`)
     }
     navigator.clipboard.writeText(text)
     setShowToast(true)
@@ -105,15 +104,19 @@ function GroupManagement( {user} ) {
           <Toast.Header>
             <strong className="me-auto">FamilySpam 🤖</strong>
           </Toast.Header>
-          <Toast.Body>
+          <Toast.Body >
             {toastBody}
           </Toast.Body>
         </Toast>
       </ToastContainer>
       <Stack gap={2} className="col-md-5 mx-auto">
-        <h2>Group management</h2>
-        <h3>Group name: {groupName}</h3>
-        <h4 style={{ cursor: "pointer" }} onClick={copyAliasToClipboard}>Family email address: <code>{emailAlias}@familyspam.com</code></h4>
+        <h2>Family management</h2>
+        <h4>Family name:</h4>
+        <h5>{groupName}</h5>
+        <div style={{ cursor: "pointer" }} onClick={copyAliasToClipboard}>
+          <h4>Family email address:</h4>
+          <code>{emailAlias}@familyspam.com</code> 📋
+        </div>
         {user.recipients.length > 0 &&
           <>
             <hr/>
@@ -128,7 +131,7 @@ function GroupManagement( {user} ) {
         <hr/>
         <Form onSubmit={handleInvite}>
           <Form.Group className="mb-3" controlId="formBasicEmail">
-            <Form.Label><h4>Invite someone to your group:</h4></Form.Label>
+            <Form.Label><h4>Invite someone to your family:</h4></Form.Label>
             <Form.Control
               type="email"
               placeholder="Enter email"
@@ -153,7 +156,7 @@ function GroupManagement( {user} ) {
 
         <Form onSubmit={handleGroupNameUpdate}>
           <Form.Group className="mb-3" controlId="formBasicName">
-            <Form.Label><h4>Update your group name:</h4></Form.Label>
+            <Form.Label><h4>Update your family name:</h4></Form.Label>
             <Form.Control
               type="text"
               placeholder={groupName}
@@ -178,7 +181,7 @@ function GroupManagement( {user} ) {
 
         <Form onSubmit={handleGroupAliasUpdate}>
           <Form.Group className="mb-3">
-            <Form.Label htmlFor="basic-url"><h4>Update your group alias:</h4></Form.Label>
+            <Form.Label htmlFor="basic-url"><h4>Update your family alias:</h4></Form.Label>
             <InputGroup className="mb-3">
               <Form.Control
                 aria-describedby="basic-addon3"
