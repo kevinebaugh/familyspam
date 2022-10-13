@@ -12,14 +12,16 @@ function NavBar( {user} ) {
       headers: {
         "Content-Type": "application/json",
       }
-    }).then(response => response.json())
-      .then(data => {
-        document.location.assign("/sign-in")
-      })
-      .catch((error) => {
-        console.error(error)
-        document.location.assign("/sign-in")
-      })}
+    })
+    .then(response => response.json())
+    .then(data => {
+      document.location.assign("/sign-in")
+    })
+    .catch((error) => {
+      console.error(error)
+      document.location.assign("/sign-in")
+    })
+  }
 
   return (
     <Navbar bg="light" expand="lg">
@@ -39,7 +41,7 @@ function NavBar( {user} ) {
               {user && (
                 <>
                   <NavDropdown.Divider />
-                  <NavDropdown.Item href="/" onClick={handleSignOut}>
+                  <NavDropdown.Item href="/" onClick={handleSignOut} title={`Signed in as ${user["email_address"]}`}>
                     Sign out
                   </NavDropdown.Item>
                 </>
