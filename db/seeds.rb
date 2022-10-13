@@ -23,7 +23,6 @@ group_admin = GroupAdmin.create(
 
 kevins_recipients = [
   kevin,
-  group_admin,
   Recipient.create(
     email_address: "kevin@ifttt.com"
   )
@@ -49,7 +48,6 @@ group_admin = GroupAdmin.create(
 
 ebaughs_recipients =[
   kevin,
-  group_admin,
   Recipient.create(
     email_address: "kevinebaugh+anotherebaugh@gmail.com"
   )
