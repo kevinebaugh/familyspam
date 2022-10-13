@@ -120,7 +120,7 @@ function GroupManagement( {user} ) {
             <ListGroup >
               <h4>Active recipients:</h4>
               {user.recipients.map( (recipient) => (
-                <ListGroup.Item>• {recipient.email_address}</ListGroup.Item>
+                <ListGroup.Item key={recipient.email_address}>• {recipient.email_address}</ListGroup.Item>
                 ))}
             </ListGroup>
           </>
@@ -177,7 +177,7 @@ function GroupManagement( {user} ) {
         </Form>
 
         <Form onSubmit={handleGroupAliasUpdate}>
-          <Form.Group className="mb-3" controlId="formBasicName">
+          <Form.Group className="mb-3">
             <Form.Label htmlFor="basic-url"><h4>Update your group alias:</h4></Form.Label>
             <InputGroup className="mb-3">
               <Form.Control
