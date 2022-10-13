@@ -33,11 +33,12 @@ function GroupManagement( {user} ) {
       body: JSON.stringify({
         email_address: invitedEmailAddress,
       }),
-    }).then(response => response.json())
+    })
+    .then(response => response.json())
     .then(data => {
       setInvitedEmailAddress("")
       setShowToast(true)
-      })
+    })
   }
 
   function handleGroupNameUpdate(e) {

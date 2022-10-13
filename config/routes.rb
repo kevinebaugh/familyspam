@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   resources :recipients
   resources :messages
 
-  get 'accept/:code', to: 'group_invitations#accept'
+  post 'accept', to: 'group_invitations#accept'
 
   get 'me', to: 'group_admins#me'
 

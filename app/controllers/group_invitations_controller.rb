@@ -79,7 +79,6 @@ class GroupInvitationsController < ApplicationController
       errors.push("Invalid code!")
     end
 
-
     render json: { errors: errors }, status: errors.present? ? :unprocessable_entity : :created
   end
 

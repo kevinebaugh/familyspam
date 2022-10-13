@@ -6,6 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import SignInUp from "./SignInUp";
 import NavBar from "./NavBar";
 import Faqs from "./Faqs";
+import InvitationAcceptance from "./InvitationAcceptance";
 import GroupManagement from "./GroupManagement";
 
 function App() {
@@ -31,7 +32,7 @@ function App() {
         <NavBar user={user} />
         <Switch>
           <Route path="/accept">
-            {/* <InvitationAcceptance code={window.location.toString().split("/")[4]} /> */}
+            <InvitationAcceptance code={window.location.toString().split("/")[4]} />
           </Route>
 
           {user &&
