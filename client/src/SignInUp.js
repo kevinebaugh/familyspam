@@ -187,7 +187,7 @@ function SignInUp( {user, setUser} ) {
               variant="outline-primary"
               type="submit"
               disabled={
-                emailAddress === "" || password === "" || passwordConfirmation === ""
+                emailAddress === "" || password === ""
               }
             >
               Sign in
