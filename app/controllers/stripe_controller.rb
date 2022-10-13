@@ -5,10 +5,11 @@ class StripeController < ApplicationController
     Stripe.api_key = ENV["STRIPE_SECRET_KEY"]
 
     # The price ID passed from the front end.
-      price_id = params['priceId']
+      price_id = params['price_id']
     # price_id = '{{PRICE_ID}}'
 
     session = Stripe::Checkout::Session.create({
+      customer_email: params["email_address"],
       success_url: "#{ENV["DOMAIN_WITH_SCHEME"]}/success?session_id={CHECKOUT_SESSION_ID}",
       cancel_url: "#{ENV["DOMAIN_WITH_SCHEME"]}/cancel",
       mode: 'subscription',

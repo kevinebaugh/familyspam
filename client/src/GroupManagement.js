@@ -209,7 +209,8 @@ function GroupManagement( {user} ) {
         </Form>
         <form action="/create-checkout-session" method="POST">
           <h4>Subscribe ($1 / 100 emails)</h4>
-          <input type="hidden" name="priceId" value="price_1LnOP8JT2S6kGp57M50PIttD" />
+          <input type="hidden" name="price_id" value="price_1LnOP8JT2S6kGp57M50PIttD" />
+          <input type="hidden" name="email_address" value={user["email_address"]} />
           <Button variant="outline-primary" type="submit">Checkout</Button>
         </form>
       </Stack>
