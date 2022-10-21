@@ -64,7 +64,7 @@ function SignInUp( {user, setUser} ) {
       }),
     }).then(response => response.json())
     .then(data => {
-      if (!!data.errors.length) {
+      if (!!data.errors?.length) {
           setToastBody("There was an error when signing in.")
           setShowToast(true)
         } else {

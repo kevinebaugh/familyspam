@@ -41,7 +41,7 @@ class GroupsController < ApplicationController
 
   def recent_messages
     limit = params[:limit] || 10
-    messages = Message.for_group_id(@group_id)
+    messages = Message.for_group_id(@group.id)
 
     render json: messages.take(limit)
   end
