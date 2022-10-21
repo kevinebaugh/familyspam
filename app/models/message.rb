@@ -7,6 +7,9 @@ class Message < ApplicationRecord
 
   after_create :send_outgoing_messages_after_incoming_message, if: :incoming?
 
+  default_scope { order(created_at: :desc) }
+  scope :for_group_id, ->(group_id) { where(group_id: group_id) }
+
   def incoming?
     direction == "incoming"
   end

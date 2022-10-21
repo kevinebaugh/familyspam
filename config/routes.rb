@@ -17,6 +17,8 @@ Rails.application.routes.draw do
   get "success", to: "stripe#success"
   get "cancel", to: "stripe#cancel"
 
+  get "recent_messages", to: "groups#recent_messages"
+
   # Routing logic: fallback requests for React Router.
   # Leave this here to help deploy your app later!
   get "*path", to: "fallback#index", constraints: ->(req) { !req.xhr? && req.format.html? }

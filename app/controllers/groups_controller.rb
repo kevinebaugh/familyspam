@@ -1,5 +1,5 @@
 class GroupsController < ApplicationController
-  before_action :set_group, only: [:show, :update, :destroy]
+  before_action :set_group, only: [:show, :update, :destroy, :recent_messages]
 
   # GET /groups
   def index
@@ -37,6 +37,14 @@ class GroupsController < ApplicationController
   # DELETE /groups/1
   def destroy
     @group.destroy
+  end
+
+  def recent_messages
+    limit = params[:limit] || 10
+    messages = Message.for_group_id(@group_id)
+    messages = messages.take(limit)
+
+    render json: [1,2,3]
   end
 
   private
