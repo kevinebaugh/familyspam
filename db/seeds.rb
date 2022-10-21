@@ -1,21 +1,13 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
-
 # Create groups
 rand(10..20).times do
   last_name = Faker::Name.last_name
 
-  group = Group.create(
+  group = Group.create!(
     name: last_name,
     email_alias: "the-#{last_name}s"
   )
 
-  GroupAdmin.create(
+  GroupAdmin.create!(
     email_address: Faker::Internet.safe_email,
     password: "hello",
     password_confirmation: "hello",
@@ -25,7 +17,7 @@ end
 
 Group.all.each do |group|
   rand(10..50).times do
-    Message.create(
+    Message.create!(
       body_plain: Faker::Lorem.sentences(number: rand(10)),
       body_html: Faker::Lorem.sentences(number: rand(10)),
       group_id: group.id,
@@ -36,11 +28,11 @@ Group.all.each do |group|
   end
 
   rand(2..10).times do
-    recipient = Recipient.create(
+    recipient = Recipient.create!(
       email_address: Faker::Internet.safe_email
     )
 
-    GroupRecipient.create(
+    GroupRecipient.create!(
       group_id: group.id,
       recipient_id: recipient.id
     )
@@ -51,14 +43,14 @@ all_group_ids = Group.pluck(:id)
 
 # Create group invitations
 rand(10..20).times do
-  GroupInvitation.create(
+  GroupInvitation.create!(
     group_id: all_group_ids.sample,
     email_address: Faker::Internet.safe_email
   )
 end
 
 rand(10..20).times do
-  Faq.create(
+  Faq.create!(
     question: Faker::Lorem.question,
     answer: Faker::Lorem.paragraph(sentence_count: rand(1..5)),
     weight: rand(1000)
