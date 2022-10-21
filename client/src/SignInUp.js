@@ -109,7 +109,7 @@ function SignInUp( {user, setUser} ) {
             <ul>
               <li>One email address that forwards to your whole family.</li>
               <li>Simple group management.</li>
-              <li>Straightforward pricing: <s>$1 per 100 emails</s> free for now </li>
+              <li>Straightforward pricing: <s>$10 per 100 emails</s> free for now </li>
             </ul>
 
             <Button
