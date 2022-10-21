@@ -28,7 +28,7 @@ class Message < ApplicationRecord
 
       # Define your message parameters
       message_params = {
-        from: "#{from.split(" <")[0]} via #{group.email_alias}@familyspam.com",
+        from: "#{from.split(" <")[0]} via #{group.email_alias} @ FamilySpam.com",
         to: recipient.email_address,
         "h:Reply-To": "#{from}, #{group.email_alias}@familyspam.com",
         subject: subject,
