@@ -6,98 +6,69 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-kevin = Recipient.create(
-  email_address: "kevinebaugh@gmail.com"
-)
+# Create groups
+rand(10..20).times do
+  last_name = Faker::Name.last_name
 
-kevins = Group.create(
-  name: "Kevin",
-  email_alias: "kevins"
-)
-
-group_admin = GroupAdmin.create(
-  email_address: "kevinebaugh+kevins-admin@gmail.com",
-  group_id: kevins.id,
-  password_digest: "test"
-)
-
-kevins_recipients = [
-  kevin,
-  Recipient.create(
-    email_address: "kevin@ifttt.com"
+  group = Group.create(
+    name: last_name,
+    email_alias: "the-#{last_name}s"
   )
-]
 
-kevins_recipients.each do |recipient|
-  GroupRecipient.create(
-    group_id: kevins.id,
-    recipient_id: recipient.id
+  GroupAdmin.create(
+    email_address: Faker::Internet.safe_email,
+    password: "hello",
+    password_confirmation: "hello",
+    group_id: group.id
   )
 end
 
-ebaughs = Group.create(
-  name: "Ebaugh",
-  email_alias: "ebaughs"
-)
+Group.all.each do |group|
+  rand(10..50).times do
+    Message.create(
+      body_plain: Faker::Lorem.sentences(number: rand(10)),
+      body_html: Faker::Lorem.sentences(number: rand(10)),
+      group_id: group.id,
+      direction: "outgoing",
+      subject: Faker::Lorem.sentence(word_count: rand(10)),
+      from: Faker::Internet.safe_email
+    )
+  end
 
-group_admin = GroupAdmin.create(
-  email_address: "kevinebaugh+ebaughs-admin@gmail.com",
-  group_id: ebaughs.id,
-  password_digest: "test"
-)
+  rand(2..10).times do
+    recipient = Recipient.create(
+      email_address: Faker::Internet.safe_email
+    )
 
-ebaughs_recipients =[
-  kevin,
-  Recipient.create(
-    email_address: "kevinebaugh+anotherebaugh@gmail.com"
-  )
-]
+    GroupRecipient.create(
+      group_id: group.id,
+      recipient_id: recipient.id
+    )
+  end
+end
 
-ebaughs_recipients.each do |recipient|
-  GroupRecipient.create(
-    group_id: ebaughs.id,
-    recipient_id: recipient.id
+all_group_ids = Group.pluck(:id)
+
+# Create group invitations
+rand(10..20).times do
+  GroupInvitation.create(
+    group_id: all_group_ids.sample,
+    email_address: Faker::Internet.safe_email
   )
 end
 
-GroupInvitation.create(
-  group_id: ebaughs.id,
-  email_address: "kevinebaugh+invitation-#{SecureRandom.hex}@gmail.com"
-)
-
-# Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-
-Faq.create([
-  {
-    question: "Who?",
-    answer: "You?",
+rand(10..20).times do
+  Faq.create(
+    question: Faker::Lorem.question,
+    answer: Faker::Lorem.paragraph(sentence_count: rand(1..5)),
     weight: rand(1000)
-  },
-  {
-    question: "What?",
-    answer: "Did I stutter?",
-    weight: rand(1000)
-  },
-  {
-    question: "Where?",
-    answer: "There!",
-    weight: rand(1000)
-  },
-  {
-    question: "When?",
-    answer: "I forget.",
-    weight: rand(1000)
-  },
-  {
-    question: "Why?",
-    answer: "Why not!",
-    weight: rand(1000)
-  }
-])
+  )
+end
 
 puts "🌱 Created #{Recipient.count} #{"Recipient".pluralize(Recipient.count)}"
 puts "🌱 Created #{Group.count} #{"Group".pluralize(Group.count)}"
 puts "🌱 Created #{GroupAdmin.count} #{"GroupAdmin".pluralize(GroupAdmin.count)}"
 puts "🌱 Created #{GroupRecipient.count} #{"GroupRecipient".pluralize(GroupRecipient.count)}"
 puts "🌱 Created #{GroupInvitation.count} #{"GroupInvitation".pluralize(GroupInvitation.count)}"
+puts "🌱 Created #{Message.count} #{"Message".pluralize(Message.count)}"
 puts "🌱 Created #{Faq.count} #{"Faq".pluralize(Faq.count)}"
