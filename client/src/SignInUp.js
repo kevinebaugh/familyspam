@@ -32,13 +32,13 @@ function SignInUp( {user, setUser} ) {
       }),
     }).then(response => response.json())
       .then(data => {
-        if (!!data.errors?.length) {
+        if (!!data.error?.length) {
           if (password !== passwordConfirmation) {
             setToastBody(
               "There was an error when signing up. Make sure your password matches your password confirmation."
             )
           } else {
-            setToastBody("There was an error when signing up.")
+            setToastBody(data.error)
           }
           setShowToast(true)
         } else {
