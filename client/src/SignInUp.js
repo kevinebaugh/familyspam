@@ -5,13 +5,14 @@ import Stack from 'react-bootstrap/Stack';
 import Toast from 'react-bootstrap/Toast';
 import ToastContainer from 'react-bootstrap/ToastContainer';
 import  { Redirect } from 'react-router-dom'
+import letter from './letter.gif'
 
 function SignInUp( {user, setUser} ) {
   const [emailAddress, setEmailAddress] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
 
-  const [signingUp, setSigningUp] = useState(false)
+  const [signingUp, setSigningUp] = useState(true)
 
   const [showToast, setShowToast] = useState(false)
   const [toastBody, setToastBody] = useState("")
@@ -98,6 +99,16 @@ function SignInUp( {user, setUser} ) {
           </Toast>
         </ToastContainer>
         <Stack gap={2} className="col-md-5 mx-auto">
+          <img style={{width: "20%"}} src={letter} />
+          <h1>Family Spam</h1>
+          <h3>Features:</h3>
+          <ul>
+            <li>One email address that forwards to your whole family.</li>
+            <li>Simple group management.</li>
+            <li>Straightforward pricing: <s>$1 per 100 emails</s> free for now </li>
+          </ul>
+
+          <hr/>
           <h3>Sign up for a new account:</h3>
           <Form onSubmit={handleSignup}>
             <Form.Group className="mb-3" controlId="formBasicEmail">
